@@ -10,6 +10,7 @@ executors:
     working_directory: ~/project
     resource_class: medium
 jobs:
+  test-node:
     steps:
       - checkout
       - run: echo "hello world 2"
@@ -18,4 +19,3 @@ workflows:
   build-and-test:
     jobs:
       - test-node
-
