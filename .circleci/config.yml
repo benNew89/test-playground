@@ -11,6 +11,7 @@ executors:
     resource_class: medium
 jobs:
   test-node:
+    executor: docker-executor
     steps:
       - checkout
       - run: echo "hello world 2"
@@ -19,3 +20,4 @@ workflows:
   build-and-test:
     jobs:
       - test-node
+
