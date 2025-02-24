@@ -3,12 +3,13 @@
 version: 2.1
 orbs:
   node: circleci/node@5
+executors:
+  docker-executor:
+    docker:
+      - image: cimg/base:stable
+    working_directory: ~/project
+    resource_class: medium
 jobs:
-  test-node:
-    # Install node dependencies and run tests
-    executor: node/default
-    environment:
-      JEST_JUNIT_OUTPUT_DIR: ./test-results/
     steps:
       - checkout
       - run: echo "hello world 2"
