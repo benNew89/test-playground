@@ -1,3 +1,113 @@
+## Anchors start
+global_cluster: &global_cluster
+  - test-eu1
+monitor_test_clusters: &monitor_test_clusters
+  - test-us1
+ops_test_clusters: &ops_test_clusters
+  - test-eu1
+  - test-us1
+test_clusters: &test_clusters
+  - test-eu1
+  - test-eu3
+deployable_branches: &deployable_branches
+  - demo
+  - develop
+  - e2e
+  - fedint-us1
+  - fedlocked
+  - fedramp
+  - fedstg1
+  - fedstg2
+  - fedtest
+  - gov
+  - integration-eu1
+  - integration-eu10
+  - integration-eu11
+  - integration-eu2
+  - integration-eu3
+  - integration-eu4
+  - integration-eu5
+  - integration-eu6
+  - integration-eu7
+  - integration-eu8
+  - integration-eu9
+  - integration-monitor
+  - integration-us1
+  - integration-us2
+  - integration-us3
+  - integration-us4
+  - integration-us5
+  - integration-us6
+  - integration-us7
+  - integration2
+  - locked
+  - master
+  - monitor
+  - sh1
+  - stage
+  - universal
+  - universal-fedout
+  - universal-fedramp
+  - verified
+when_develop_and_non_deployable_branches: &when_develop_and_non_deployable_branches
+  condition:
+    or:
+      - equal: [ develop, << pipeline.git.branch >> ]
+      - not:
+          matches:
+            pattern: "^demo|develop|e2e|fedint-us1|fedlocked|fedramp|fedstg1|fedstg2|fedtest|gov|integration-eu1|integration-eu10|integration-eu11|integration-eu2|integration-eu3|integration-eu4|integration-eu5|integration-eu6|integration-eu7|integration-eu8|integration-eu9|integration-monitor|integration-us1|integration-us2|integration-us3|integration-us4|integration-us5|integration-us6|integration-us7|integration2|locked|master|monitor|sh1|stage|universal|universal-fedout|universal-fedramp|verified$"
+            value: << pipeline.git.branch >>
+select_develop_and_non_deployable_branches: &select_develop_and_non_deployable_branches
+  branches:
+    ignore:
+      - demo
+      - e2e
+      - fedint-us1
+      - fedlocked
+      - fedramp
+      - fedstg1
+      - fedstg2
+      - fedtest
+      - gov
+      - integration-eu1
+      - integration-eu10
+      - integration-eu11
+      - integration-eu2
+      - integration-eu3
+      - integration-eu4
+      - integration-eu5
+      - integration-eu6
+      - integration-eu7
+      - integration-eu8
+      - integration-eu9
+      - integration-monitor
+      - integration-us1
+      - integration-us2
+      - integration-us3
+      - integration-us4
+      - integration-us5
+      - integration-us6
+      - integration-us7
+      - integration2
+      - locked
+      - master
+      - monitor
+      - sh1
+      - stage
+      - universal
+      - universal-fedout
+      - universal-fedramp
+      - verified
+aggregate_plans: &aggregate_plans_template
+  context:
+    - WizGithubReadOnlyContext
+    - SlackDynamoCtx
+    - wiz-cache
+  env: test
+  stage: test
+  enable_slack_mention: false
+  runner: test-tf
+## Anchors end
 version: 2.1
 orbs:
   aws-cli: circleci/aws-cli@2.0
