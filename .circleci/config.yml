@@ -9,7 +9,19 @@ jobs:
       - run:
           name: Print a message
           command: echo "Hello, CircleCI!"
+  build2:
+    docker:
+      - image: cimg/base:current  # Uses the latest CircleCI base image
+    steps:
+      - checkout  # Pulls your code from the repository
+      - run:
+          name: Print a message
+          command: echo "Hello, CircleCI! This is version 2"
 workflows:
-  build_and_test:
+  build_and_test_basic:
     jobs:
+      - build
+  build_and_test_advanced:
+    jobs:
+      - build2
       - build
