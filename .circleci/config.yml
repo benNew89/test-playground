@@ -38,14 +38,4 @@ workflows:
     jobs:
       - build
       - build2
-  build_and_test_advanced:
-    jobs:
-      - build
-      - build2:
-          requires:
-            - build
-      - build3:
-          requires:
-            - build2
-      
     
