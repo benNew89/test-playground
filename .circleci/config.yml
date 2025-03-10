@@ -43,27 +43,27 @@ jobs:
           command: echo "Hello, CircleCI! This is version 4"
 workflows:
   version: 2
-    dbt_parse_linting:
-      jobs:
-        - dbt_parse_linting
-        - build2
-    build_and_test_advanced1:
-      jobs:
-        - dbt_parse_linting
-        - build2:
-            requires:
-              - dbt_parse_linting
-        - build3:
-            requires:
-              - build2
-    build_and_test_advanced2:
-      jobs:
-        - build4
-        - dbt_parse_linting
-        - build2:
-            requires:
-              - dbt_parse_linting
-        - build3:
-            requires:
+  dbt_parse_linting:
+    jobs:
+      - dbt_parse_linting
+      - build2
+  build_and_test_advanced1:
+    jobs:
+      - dbt_parse_linting
+      - build2:
+          requires:
+            - dbt_parse_linting
+      - build3:
+          requires:
+            - build2
+  build_and_test_advanced2:
+    jobs:
+      - build4
+      - dbt_parse_linting
+      - build2:
+          requires:
+            - dbt_parse_linting
+      - build3:
+          requires:
               - build2
     
