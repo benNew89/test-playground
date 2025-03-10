@@ -1,25 +1,32 @@
 version: 2.1
 
+executors:
+  dbt_parse_linting:
+    docker:
+      - image: python:3.8.13-buster
+    resource_class: medium+
+    
+references:
+  dbt_container_config: &dbt_container_config
+    executor: dbt_parse_linting
+
 jobs:
   build:
-    docker:
-      - image: cimg/base:current  # Uses the latest CircleCI base image
+    <<: *dbt_container_config
     steps:
       - checkout  # Pulls your code from the repository
       - run:
           name: Print a message
           command: echo "Hello, CircleCI!"
   build2:
-    docker:
-      - image: cimg/base:current  # Uses the latest CircleCI base image
+    <<: *dbt_container_config
     steps:
       - checkout  # Pulls your code from the repository
       - run:
           name: Print a message
           command: echo "Hello, CircleCI! This is version 2"
   build3:
-    docker:
-      - image: cimg/base:current  # Uses the latest CircleCI base image
+    <<: *dbt_container_config
     steps:
       - checkout  # Pulls your code from the repository
       - run:
