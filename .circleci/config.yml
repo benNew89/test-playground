@@ -24,7 +24,6 @@ workflows:
           name: build
   build_and_test_advanced:
     jobs:
-      - build2
-          name: build2
       - build
-          name: build
+      - build2
+        requires: build
