@@ -32,10 +32,36 @@ jobs:
       - run:
           name: Print a message
           command: echo "Hello, CircleCI! This is version 3"
+  build4:
+    <<: *dbt_container_config
+    steps:
+      - checkout  # Pulls your code from the repository
+      - run:
+          name: Print a message
+          command: echo "Hello, CircleCI! This is version 4"
 workflows:
   version: 2
   build_and_test_basic:
     jobs:
       - build
       - build2
+  build_and_test_advanced1:
+    jobs:
+      - build
+      - build2:
+          requires:
+            - build
+      - build3:
+          requires:
+            - build2
+  build_and_test_advanced2:
+    jobs:
+      - build4
+      - build
+      - build2:
+          requires:
+            - build
+      - build3:
+          requires:
+            - build2
     
