@@ -173,7 +173,7 @@ workflows:
         - equal: [/.*\/nodeploy\/.*/, << pipeline.git.branch >>]
         - equal: [/.*\/noprdeploy\/.*/, << pipeline.git.branch >>]
     jobs:
-      - fetch-node-modules:
+      - fetch-node-modules
       
       - test:
           name: test
@@ -203,7 +203,7 @@ workflows:
           - equal: [/.*\/nodeploy\/.*/, << pipeline.git.branch >>]
           - equal: [/.*\/noprdeploy\/.*/, << pipeline.git.branch >>]
     jobs:
-      - do-nothing:
+      - do-nothing
 
       - fetch-node-modules:
           requires:
@@ -265,7 +265,7 @@ workflows:
   build-deploy-main:
     when: pipeline.git.branch == "main"
     jobs:
-      - main-skip-deploy:
+      - main-skip-deploy
 
       - block_workflow:
           requires:
