@@ -59,8 +59,7 @@ jobs:
 
   cypress-run:
     executor:
-      name: cypress/default
-      node-version: '14.21.3'
+      name: node
     steps:
       - checkout
       # try to restore the modules from the cache
