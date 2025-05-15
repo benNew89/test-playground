@@ -165,17 +165,16 @@ jobs:
 workflows:
   # to validate snyk, dependabot, and release PRs
   build-simple:
+    when:
+      or:
+        - equal: [/snyk-.*/, << pipeline.git.branch >>]
+        - equal: [/dependabot\/.*/, << pipeline.git.branch >>]
+        - equal: [/release\/.*/, << pipeline.git.branch >>]
+        - equal: [/.*\/nodeploy\/.*/, << pipeline.git.branch >>]
+        - equal: [/.*\/noprdeploy\/.*/, << pipeline.git.branch >>]
     jobs:
       - fetch-node-modules:
-          filters:
-            branches:
-              only:
-                - /snyk-.*/
-                - /dependabot\/.*/
-                - /release\/.*/
-                - /.*\/nodeploy\/.*/
-                - /.*\/noprdeploy\/.*/
-
+      
       - test:
           name: test
           requires:
@@ -192,19 +191,19 @@ workflows:
 
   # to validate all other PRs
   build:
+    when:
+      not:
+        or:
+          - equal: [develop, << pipeline.git.branch >>]
+          - equal: [master, << pipeline.git.branch >>]
+          - equal: [main, << pipeline.git.branch >>]
+          - equal: [/snyk-.*/, << pipeline.git.branch >>]
+          - equal: [/dependabot\/.*/, << pipeline.git.branch >>]
+          - equal: [/release\/.*/, << pipeline.git.branch >>]
+          - equal: [/.*\/nodeploy\/.*/, << pipeline.git.branch >>]
+          - equal: [/.*\/noprdeploy\/.*/, << pipeline.git.branch >>]
     jobs:
       - do-nothing:
-          filters:
-            branches:
-              ignore:
-                - develop
-                - master
-                - main
-                - /snyk-.*/
-                - /dependabot\/.*/
-                - /release\/.*/
-                - /.*\/nodeploy\/.*/
-                - /.*\/noprdeploy\/.*/
 
       - fetch-node-modules:
           requires:
@@ -264,12 +263,9 @@ workflows:
             - delete-pr-stack
 
   build-deploy-main:
+    when: pipeline.git.branch == "main"
     jobs:
       - main-skip-deploy:
-          filters:
-            branches:
-              only:
-                - main
 
       - block_workflow:
           requires:
