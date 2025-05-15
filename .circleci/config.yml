@@ -146,7 +146,7 @@ jobs:
       - run:
           command: echo "hello world"
   
-  block-workflow:
+  block_workflow:
     executor:
       name: smallnode
     steps:
