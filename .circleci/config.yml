@@ -177,6 +177,7 @@ workflows:
                 - /.*\/noprdeploy\/.*/
 
       - test:
+          name: test
           requires:
             - fetch-node-modules
 
@@ -222,6 +223,7 @@ workflows:
             - do-nothing
 
       - test:
+          name: test
           requires:
             - fetch-node-modules
 
@@ -278,6 +280,7 @@ workflows:
             - block_workflow
 
       - test:
+          name: test
           requires:
             - fetch-node-modules
 
