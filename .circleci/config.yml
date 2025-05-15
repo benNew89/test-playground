@@ -145,6 +145,15 @@ jobs:
       # try to restore the modules from the cache
       - run:
           command: echo "hello world"
+  
+  block-workflow:
+    executor:
+      name: smallnode
+    steps:
+      - checkout
+      # try to restore the modules from the cache
+      - run:
+          command: echo "hello world"
 
   confirm-success:
     # to be used as a GitHub PR check to confirm the pipeline completed successfully
@@ -264,13 +273,13 @@ workflows:
               only:
                 - main
 
-      - queue/block_workflow:
+      - block_workflow:
           requires:
             - main-skip-deploy
 
       - fetch-node-modules:
           requires:
-            - queue/block_workflow
+            - block_workflow
 
       - test:
           name: test
