@@ -167,21 +167,21 @@ workflows:
   build-simple:
     when:
       or:
-        matches:
-          pattern: "^snyk-.*$"
-          value: << pipeline.git.branch >>
-        matches:
-          pattern: "^dependabot/.*$"
-          value: << pipeline.git.branch >>
-        matches:
-          pattern: "^release/.*$"
-          value: << pipeline.git.branch >>
-        matches:
-          pattern: "^.*/nodeploy/.*$"
-          value: << pipeline.git.branch >>
-        matches:
-          pattern: "^.*/noprdeploy/.*$"
-          value: << pipeline.git.branch >>
+        - matches:
+            pattern: "^snyk-.*$"
+            value: << pipeline.git.branch >>
+        - matches:
+            pattern: "^dependabot/.*$"
+            value: << pipeline.git.branch >>
+        - matches:
+            pattern: "^release/.*$"
+            value: << pipeline.git.branch >>
+        - matches:
+            pattern: "^.*/nodeploy/.*$"
+            value: << pipeline.git.branch >>
+        - matches:
+            pattern: "^.*/noprdeploy/.*$"
+            value: << pipeline.git.branch >>
         # - equal: [/snyk-.*/, << pipeline.git.branch >>]
         # - equal: [/dependabot\/.*/, << pipeline.git.branch >>]
         # - equal: [/release\/.*/, << pipeline.git.branch >>]
