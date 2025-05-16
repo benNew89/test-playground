@@ -171,16 +171,16 @@ workflows:
           pattern: "^snyk-.*$"
           value: << pipeline.git.branch >>
         matches:
-          pattern: "^dependabot\/.*$"
+          pattern: "^dependabot/.*$"
           value: << pipeline.git.branch >>
         matches:
-          pattern: "^release\/.*$"
+          pattern: "^release/.*$"
           value: << pipeline.git.branch >>
         matches:
-          pattern: "^.*\/nodeploy\/.*$"
+          pattern: "^.*/nodeploy/.*$"
           value: << pipeline.git.branch >>
         matches:
-          pattern: "^.*\/noprdeploy\/.*$"
+          pattern: "^.*/noprdeploy/.*$"
           value: << pipeline.git.branch >>
         # - equal: [/snyk-.*/, << pipeline.git.branch >>]
         # - equal: [/dependabot\/.*/, << pipeline.git.branch >>]
@@ -216,16 +216,16 @@ workflows:
             pattern: "^snyk-.*$"
             value: << pipeline.git.branch >>
           - matches:
-            pattern: "^dependabot\/.*$"
+            pattern: "^dependabot/.*$"
             value: << pipeline.git.branch >>
           - matches:
-            pattern: "^release\/.*$"
+            pattern: "^release/.*$"
             value: << pipeline.git.branch >>
           - matches:
-            pattern: "^.*\/nodeploy\/.*$"
+            pattern: "^.*/nodeploy/.*$"
             value: << pipeline.git.branch >>
           - matches:
-            pattern: "^.*\/noprdeploy\/.*$"
+            pattern: "^.*/noprdeploy/.*$"
             value: << pipeline.git.branch >>
           # - equal: [/snyk-.*/, << pipeline.git.branch >>]
           # - equal: [/dependabot\/.*/, << pipeline.git.branch >>]
