@@ -209,9 +209,15 @@ workflows:
     when:
       not:
         or:
-          - equal: [develop, << pipeline.git.branch >>]
-          - equal: [master, << pipeline.git.branch >>]
-          - equal: [main, << pipeline.git.branch >>]
+          - matches:
+            pattern: "develop"
+            value: << pipeline.git.branch >>
+          - matches:
+            pattern: "master"
+            value: << pipeline.git.branch >>
+          - matches:
+            pattern: "main"
+            value: << pipeline.git.branch >>    
           - matches:
             pattern: "^snyk-.*$"
             value: << pipeline.git.branch >>
