@@ -211,7 +211,6 @@ workflows:
   build:
     when:
       not:
-        or:
           - matches:
               pattern: "develop|master|main|^snyk-|^dependabot/|^release/|^.*/nodeploy/|^.*/noprdeploy/"
               value: << pipeline.git.branch >>
