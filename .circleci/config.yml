@@ -212,7 +212,7 @@ workflows:
     when:
       not:
         matches:
-          pattern: "develop|master|main|^snyk-|^dependabot/|^release/|^.*/nodeploy/|^.*/noprdeploy/"
+          pattern: "^snyk-|^dependabot/|^release/|^.*/nodeploy/|^.*/noprdeploy/|^develop$|^master$|^main$"
           value: << pipeline.git.branch >>
           # - matches:
           #   pattern: "develop"
