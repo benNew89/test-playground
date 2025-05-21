@@ -35,12 +35,14 @@ jobs:
           name: Print a message
           command: echo "Hello, CircleCI! This is version 3"
   build4:
+    context:
+      - devsecops
     <<: *dbt_container_config
     steps:
       - checkout  # Pulls your code from the repository
       - run:
           name: Print a message
-          command: echo "Hello, CircleCI! This is version 4"
+          echo "Debug; DEVSECOPS_CHAT_WEBHOOK is ${DEVSECOPS_CHAT_WEBHOOK}"
 workflows:
   version: 2
   dbt_parse_linting:
