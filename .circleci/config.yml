@@ -58,9 +58,9 @@ workflows:
             - build2
   build_and_test_advanced2:
     jobs:
-      - build4
+      - buil4:
           context:
-            - devsecops
+          - devsecops
       - dbt_parse_linting
       - build2:
           requires:
