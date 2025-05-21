@@ -35,8 +35,6 @@ jobs:
           name: Print a message
           command: echo "Hello, CircleCI! This is version 3"
   build4:
-    context:
-      - devsecops
     <<: *dbt_container_config
     steps:
       - checkout  # Pulls your code from the repository
@@ -61,6 +59,8 @@ workflows:
   build_and_test_advanced2:
     jobs:
       - build4
+          context:
+            - devsecops
       - dbt_parse_linting
       - build2:
           requires:
