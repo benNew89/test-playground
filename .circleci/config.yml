@@ -40,7 +40,7 @@ jobs:
       - checkout  # Pulls your code from the repository
       - run:
           command: |
-            echo "Debug; DEVSECOPS_CHAT_NOTIFICATION_URL is ${DEVSECOPS_CHAT_NOTIFICATION_URL}"
+            echo "Debug; hello is ${hello}"
 workflows:
   version: 2
   dbt_parse_linting:
