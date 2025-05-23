@@ -39,8 +39,12 @@ jobs:
     steps:
       - checkout  # Pulls your code from the repository
       - run:
+          name: Debug Environment Variables
           command: |
-            echo "Debug; hello is ${hello}"
+            echo "All environment variables containing DEVSECOPS:"
+            env | grep context1 || echo "No context1 variables found"
+            echo "DEVSECOPS_CHAT_WEBHOOK value: '${DEVSECOPS_CHAT_WEBHOOK}'"
+            echo "Length of DEVSECOPS_CHAT_WEBHOOK: ${#DEVSECOPS_CHAT_WEBHOOK}"
             echo "test"
 workflows:
   version: 2
