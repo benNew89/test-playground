@@ -41,6 +41,7 @@ jobs:
       - run:
           command: |
             echo "Debug; hello is ${hello}"
+            echo "test"
 workflows:
   version: 2
   dbt_parse_linting:
