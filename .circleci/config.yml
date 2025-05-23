@@ -18,7 +18,7 @@ jobs:
       - run:
           name: Debug Environment Variables
           command: |
-            echo "All environment variables containing DEVSECOPS:"
+            echo "All environment variables containing context1:"
             env | grep context1 || echo "No context1 variables found"
             echo "DEVSECOPS_CHAT_WEBHOOK value: '${DEVSECOPS_CHAT_WEBHOOK}'"
             echo "Length of DEVSECOPS_CHAT_WEBHOOK: ${#DEVSECOPS_CHAT_WEBHOOK}"
