@@ -14,7 +14,7 @@ jobs:
   build:
     <<: *dbt_container_config
     steps:
-      - run: git clone --depth 1 "$CIRCLE_REPOSITORY_URL" --branch "$CIRCLE_BRANCH"  # Pulls your code from the repository
+      - checkout
       - run:
           name: Debug Environment Variables
           command: |
