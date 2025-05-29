@@ -43,7 +43,7 @@ jobs:
               echo "No changes in 'server/' or '.circleci/'. Skipping build."
               exit 1
             fi
-        - run:
+      - run:
           name: Test circleci env subst
           command: |
             echo "end of jobs"
