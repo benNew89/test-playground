@@ -15,9 +15,10 @@ jobs:
       #     command: |
       #       DEBIAN_FRONTEND=noninteractive sudo apt-get install -y libxrender1=1:0.9.10-1build4
 
-      - run: 
-          name: NPM Install
-          run: npm install
+      - run:
+          name: Install npm packages
+          command: |
+            npm install
 workflows:
   version: 2
   reproduce-apt:
