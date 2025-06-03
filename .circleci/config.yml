@@ -6,7 +6,13 @@ jobs:
       - image: ubuntu:22.04
     steps:
       - run:
-          name: Update APT and Install systemd
+          name: Install Specific Version of systemd
           command: |
             apt-get update
-            DEBIAN_FRONTEND=noninteractive apt-get install -y systemd
+            apt-get install -y systemd=249.11-0ubuntu3.15
+
+workflows:
+  version: 2
+  reproduce-apt:
+    jobs:
+      - reproduce-apt-logs
