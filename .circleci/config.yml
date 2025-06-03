@@ -8,8 +8,8 @@ jobs:
       - run:
           name: Install Specific Version of systemd
           command: |
-            apt-get update
-            apt-get install -y systemd=249.11-0ubuntu3.15
+            sudo apt-get update
+            sudo apt-get install -y systemd=249.11-0ubuntu3.15
       # - run:
       #     name: Install Specific Packages
       #     command: |
