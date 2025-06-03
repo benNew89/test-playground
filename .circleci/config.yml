@@ -1,58 +1,12 @@
 version: 2.1
 
-executors:
-  dbt_parse_linting:
-    docker:
-      - image: python:3.8.13-buster
-    resource_class: medium+
-    
-references:
-  dbt_container_config: &dbt_container_config
-    executor: dbt_parse_linting
-
 jobs:
-  build:
-    <<: *dbt_container_config
+  reproduce-apt-logs:
+    docker:
+      - image: ubuntu:22.04
     steps:
-      - checkout  # Add this to access git commands
       - run:
-          name: Debug Environment Variables
+          name: Update APT and Install systemd
           command: |
-            echo "All environment variables containing DEVSECOPS:"
-            env | grep DEVSECOPS || echo "No DEVSECOPS variables found"
-            echo "DEVSECOPS_CHAT_WEBHOOK value: '${DEVSECOPS_CHAT_WEBHOOK}'"
-            echo "Length of DEVSECOPS_CHAT_WEBHOOK: ${#DEVSECOPS_CHAT_WEBHOOK}"
-            echo "DEVSECOPS_CHAT_NOTIFICATION_URL value: '${DEVSECOPS_CHAT_NOTIFICATION_URL}'"
-            echo "Length of DEVSECOPS_CHAT_NOTIFICATION_URL: ${#DEVSECOPS_CHAT_NOTIFICATION_URL}"
-            echo "hello value: '${hello}'"
-      - run:
-          name: Test circleci env subst
-          command: |
-            echo "Testing circleci env subst command:"
-            echo "Direct variable access: ${DEVSECOPS_CHAT_NOTIFICATION_URL}"
-            echo "Using env subst: $(circleci env subst DEVSECOPS_CHAT_NOTIFICATION_URL)"
-            echo "circleci version: $(circleci version 2>/dev/null || echo 'circleci command not found')"
-      - run: 
-          name: "Check if Server or .circleci folder is changed"
-          command: |
-            echo "Checking last commit for changes in 'server/' or '.circleci/'"
-            if git diff --name-only HEAD^1 HEAD | grep -qE '^(server/|\.circleci/)'; then
-              echo "Changes found in 'server/' or '.circleci/'. Proceeding with build."
-              exit 0
-            else
-              echo "No changes in 'server/' or '.circleci/'. Skipping build."
-              circleci-agent step halt
-            fi
-      - run:
-          name: Test circleci env subst
-          command: |
-            echo "end of jobs"
-            
-workflows:
-  version: 2
-  build_and_test_advanced2:
-    jobs:
-      - build:
-          context:
-          - context1
-    
+            apt-get update
+            DEBIAN_FRONTEND=noninteractive apt-get install -y systemd
