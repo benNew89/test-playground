@@ -9,6 +9,7 @@ jobs:
           name: Install Specific Version of systemd
           command: |
             sudo apt-get update
+            sudo apt-get install -y wget unzip fonts-liberation libasound2 libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcups2 libgbm1 libgtk-3-0 libnspr4 libnss3 libu2f-udev libxcomposite1 libxkbcommon0 libxrandr2 xdg-utils dbus xvfb
             #sudo apt-get install -y systemd=249.11-0ubuntu3.15
       # - run:
       #     name: Install Specific Packages
