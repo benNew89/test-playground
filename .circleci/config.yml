@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   reproduce-apt-logs:
     docker:
-      - image: ubuntu:22.04
+      - image: cimg/node:22.2.0
     steps:
       - run:
           name: Install Specific Version of systemd
