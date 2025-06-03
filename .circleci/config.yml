@@ -3,18 +3,21 @@ version: 2.1
 jobs:
   reproduce-apt-logs:
     docker:
-      - image: cimg/node:22.2.0
+      - image: cimg/node:24.1.0-browsers
     steps:
-      - run:
-          name: Install Specific Version of systemd
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y systemd=249.11-0ubuntu3.15
-      - run:
-          name: Install Specific Packages
-          command: |
-            DEBIAN_FRONTEND=noninteractive sudo apt-get install -y libxrender1=1:0.9.10-1build4
+      # - run:
+      #     name: Install Specific Version of systemd
+      #     command: |
+      #       sudo apt-get update
+      #       sudo apt-get install -y systemd=249.11-0ubuntu3.15
+      # - run:
+      #     name: Install Specific Packages
+      #     command: |
+      #       DEBIAN_FRONTEND=noninteractive sudo apt-get install -y libxrender1=1:0.9.10-1build4
 
+      - run: 
+          name: NPM Install
+          run: npm install
 workflows:
   version: 2
   reproduce-apt:
