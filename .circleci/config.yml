@@ -13,7 +13,7 @@ jobs:
       - run:
           name: Install Specific Packages
           command: |
-            DEBIAN_FRONTEND=noninteractive apt-get install -y libxrender1=1:0.9.10-1build4
+            DEBIAN_FRONTEND=noninteractive sudo apt-get install -y libxrender1=1:0.9.10-1build4
 
 workflows:
   version: 2
