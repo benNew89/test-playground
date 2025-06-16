@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  php: circleci/php@2.0.0
+  php: circleci/php@1.0.0
   
 jobs:
   build_all:
@@ -9,7 +9,7 @@ jobs:
       - image: 'cimg/base:current'
     steps:
       - checkout
-      - php/install_php:
+      - php/install-php:
           version: '8.2'
 workflows:
   version: 2
