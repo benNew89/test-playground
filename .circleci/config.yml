@@ -10,7 +10,7 @@ jobs:
     steps:
       - checkout
       - php/install-php:
-          version: '8.2'
+          version: '8.3'
 workflows:
   version: 2
   reproduce-apt:
