@@ -6,7 +6,7 @@ orbs:
 jobs:
   build_all:
     docker:
-      - image: 'cimg/base:stable'
+      - image: 'cimg/base:current'
     steps:
       - checkout
       - php/install_php:
