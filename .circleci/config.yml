@@ -1,22 +1,18 @@
 version: 2.1
 
+orbs:
+  php: circleci/php@1.1.0
+  
 jobs:
-  reproduce-apt-logs:
+  build_all:
     docker:
-      - image: cimg/node:22.2.0
+      - image: 'cimg/base:stable'
     steps:
-      - run:
-          name: Install Specific Version of systemd
-          command: |
-            apt-get update
-            apt-get install -y wget unzip fonts-liberation libasound2 libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcups2 libgbm1 libgtk-3-0 libnspr4 libnss3 libu2f-udev libxcomposite1 libxkbcommon0 libxrandr2 xdg-utils dbus xvfb
-            #sudo apt-get install -y systemd=249.11-0ubuntu3.15
-      # - run:
-      #     name: Install Specific Packages
-      #     command: |
-      #       DEBIAN_FRONTEND=noninteractive sudo apt-get install -y libxrender1=1:0.9.10-1build4
+      - checkout
+      - php/install-php:
+          version: '8.2'
 workflows:
   version: 2
   reproduce-apt:
     jobs:
-      - reproduce-apt-logs
+      - build_all
