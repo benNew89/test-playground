@@ -27,9 +27,9 @@ jobs:
 workflows:
   build:
     jobs:
-      - test:
+      - test
 
-      - compile:
+      - compile
 
       - staging:
           requires:
