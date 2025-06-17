@@ -9,10 +9,19 @@ workflows:
   setup-workflow:
     jobs:
       - path-filtering/filter:
+          name: check-updated-files
+          # Add this debug step
+          pre-steps:
+            - run:
+                name: Debug - Show changed files
+                command: |
+                  echo "Files changed in this push:"
+                  git diff --name-only origin/main...HEAD
           base-revision: main
           config-path: .circleci/no-updates.yml
           mapping: | # The mapping will be used to generate the dynamic configuration for all conditions that match.
             RustErp/.* build-erp true .circleci/rust-erp.yml
+            RustStore/.* build-store true .circleci/rust-store.yml
             .* always-continue true .circleci/shared.yml
           filters:
             tags:
