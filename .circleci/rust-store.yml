@@ -44,57 +44,25 @@ workflows:
   build:
     jobs:
       - test:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              # Trigger on every tag
-              only: /.*/
 
       - compile:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              # Trigger on every tag
-              only: /.*/
 
       - win:
           requires:
             - test
             - compile
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /.*/
 
       - droid:
           requires:
             - test
             - compile
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /.*/
 
       - staging:
           requires:
             - win
             - droid
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /.*-beta/
 
       - prod:
           requires:
             - win
             - droid
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /.*-master/
