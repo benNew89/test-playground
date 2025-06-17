@@ -11,7 +11,7 @@ jobs:
   compile:
     executor: nix-executor
     steps:
-      - run: echo "compile job in rust-rep"
+      - run: echo "compile job in rust-rep 123"
       
   test:
     executor: nix-executor
