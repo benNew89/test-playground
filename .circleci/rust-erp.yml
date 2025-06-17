@@ -28,27 +28,10 @@ workflows:
   build:
     jobs:
       - test:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              # Trigger on every tag
-              only: /.*/
 
       - compile:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              # Trigger on every tag
-              only: /.*/
 
       - staging:
           requires:
             - compile
             - test
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /.*-erp/
