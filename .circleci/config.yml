@@ -13,7 +13,6 @@ workflows:
           config-path: .circleci/no-updates.yml
           mapping: | # The mapping will be used to generate the dynamic configuration for all conditions that match.
             RustErp/.* build-erp true .circleci/rust-erp.yml
-            RustStore/.* build-store true .circleci/rust-store.yml
             .* always-continue true .circleci/shared.yml
           filters:
             tags:
