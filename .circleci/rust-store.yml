@@ -43,9 +43,9 @@ jobs:
 workflows:
   build:
     jobs:
-      - test:
+      - test
 
-      - compile:
+      - compile
 
       - win:
           requires:
