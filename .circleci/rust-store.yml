@@ -1,0 +1,100 @@
+version: 2.1
+
+commands:
+  
+executors:
+  smallnode:
+    docker:
+      - image: cimg/node:14.21.3
+    resource_class: small
+
+jobs:
+  # Precompile all the rust dependencies
+  compile:
+    executor: smallnode
+    steps:
+      - run: echo "compile job in rust store"
+
+  test:
+    executor: smallnode
+    steps:
+      - run: echo "test job in rust store"
+  win:
+    executor: smallnode
+    steps:
+      - run: echo "win job in rust store"
+
+  droid:
+    executor: smallnode
+    steps:
+      - run: echo "droid job in rust store"
+      
+  staging:
+    executor: smallnode
+    steps:
+      - run: echo "stage job in rust store"
+
+  prod:
+    executor: smallnode
+    steps:
+      - run: echo "prod job in rust store"
+
+# We only want to trigger this workflow on tags, not pushes to branches.
+workflows:
+  build:
+    jobs:
+      - test:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              # Trigger on every tag
+              only: /.*/
+
+      - compile:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              # Trigger on every tag
+              only: /.*/
+
+      - win:
+          requires:
+            - test
+            - compile
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*/
+
+      - droid:
+          requires:
+            - test
+            - compile
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*/
+
+      - staging:
+          requires:
+            - win
+            - droid
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*-beta/
+
+      - prod:
+          requires:
+            - win
+            - droid
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*-master/
