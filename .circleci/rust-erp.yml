@@ -1,0 +1,54 @@
+version: 2.1
+
+executors:
+  nix-executor:
+    resource_class: medium+
+    docker:
+      - image: nixos/nix
+
+jobs:
+  # Precompile all the rust dependencies
+  compile:
+    executor: nix-executor
+    steps:
+      - run: echo "compile job in rust-rep"
+      
+  test:
+    executor: nix-executor
+    steps:
+      - run: echo "test job in rust-rep"
+
+  staging:
+    executor: nix-executor
+    steps:
+      - run: echo "staging job in rust-rep"
+
+# We only want to trigger this workflow on tags, not pushes to branches.
+workflows:
+  build:
+    jobs:
+      - test:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              # Trigger on every tag
+              only: /.*/
+
+      - compile:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              # Trigger on every tag
+              only: /.*/
+
+      - staging:
+          requires:
+            - compile
+            - test
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*-erp/
