@@ -1,0 +1,27 @@
+version: 2.1
+
+# define the parameters from the setup config.
+parameters:
+  always-continue:
+    type: boolean
+    default: false
+  build-store:
+    type: boolean
+    default: false
+  build-erp:
+    type: boolean
+    default: false
+
+jobs:
+  any-change:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: echo '`always-continue` "<< pipeline.parameters.always-continue >>"'
+      - run: echo '`build-store` "<< pipeline.parameters.build-store >>"'
+      - run: echo '`build-erp` "<< pipeline.parameters.build-erp >>"'
+
+workflows:
+  run-on-any-change:
+    jobs:
+      - any-change            
