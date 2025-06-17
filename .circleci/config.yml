@@ -12,6 +12,7 @@ workflows:
           name: check-updated-files
           # Add this debug step
           pre-steps:
+            - checkout
             - run:
                 name: Debug - Show changed files
                 command: |
