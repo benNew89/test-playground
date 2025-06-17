@@ -10,14 +10,6 @@ workflows:
     jobs:
       - path-filtering/filter:
           name: check-updated-files
-          # Add this debug step
-          pre-steps:
-            - checkout
-            - run:
-                name: Debug - Show changed files
-                command: |
-                  echo "Files changed in this push:"
-                  git diff --name-only origin/main...path-filtering-example
           base-revision: HEAD~1
           config-path: .circleci/no-updates.yml
           mapping: | # The mapping will be used to generate the dynamic configuration for all conditions that match.
