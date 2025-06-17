@@ -5,6 +5,17 @@ setup: true
 orbs:
   path-filtering: circleci/path-filtering@1.3.0
 
+parameters:
+  always-continue:
+    type: boolean
+    default: false
+  build-store:
+    type: boolean
+    default: false
+  build-erp:
+    type: boolean
+    default: false
+
 workflows:
   setup-workflow:
     jobs:
