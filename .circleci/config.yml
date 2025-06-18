@@ -9,7 +9,7 @@ workflows:
   setup-workflow:
     jobs:
       - run: 
-          command: echo "Base revision: << pipeline.git.base_revision >>"
+          command: echo "git --version"
       - path-filtering/filter:
           name: check-updated-files
           base-revision: HEAD~1
