@@ -15,14 +15,8 @@ workflows:
     when: << pipeline.parameters.run-setup >>
     jobs:
       - path-filtering/filter:
-          # Compare files on main
-          base-revision: << pipeline.git.base_revision >>
           checkout: false
-          # tag: '3.8.14'
-          ## Config for continuation; herein we reuse this config itself
           config-path: .circleci/continuation.yml
-          # checkout: false
-          # debug: true
           # 3-column space-separated table for mapping; `path-to-test parameter-to-set value-for-parameter` for each row
           mapping: |
             .* run-setup false
