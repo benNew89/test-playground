@@ -9,7 +9,8 @@ workflows:
   setup-workflow:
     jobs:
       - run: 
-          command: echo "git --version"
+          command: |
+            echo "git --version"
       - path-filtering/filter:
           name: check-updated-files
           base-revision: HEAD~1
