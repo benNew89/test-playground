@@ -3,7 +3,7 @@ version: 2.1
 setup: true
 
 orbs:
-  path-filtering: circleci/path-filtering@2.0.0
+  path-filtering: circleci/path-filtering@1.2.0
 
 jobs:
   git-version-check:
@@ -21,6 +21,7 @@ workflows:
       - path-filtering/filter:
           name: check-updated-files
           base-revision: HEAD~1
+          tag: '3.10.12'
           config-path: .circleci/no-updates.yml
           mapping: | # The mapping will be used to generate the dynamic configuration for all conditions that match.
             RustErp/.* build-erp true .circleci/rust-erp.yml
