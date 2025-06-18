@@ -8,7 +8,7 @@ orbs:
 workflows:
   setup-workflow:
     jobs:
-      - run: echo "<< pipeline.git.base_revision >>"
+      - run: echo << pipeline.git.base_revision >>
       - path-filtering/filter:
           name: check-updated-files
           base-revision: HEAD~1
