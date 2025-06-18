@@ -42,5 +42,6 @@ workflows:
   build:
     when: << pipeline.parameters.build_hypgames >>
     jobs:
+      - checkout
       - build_hypgames_dev:
       - build_ultimatehunting:
