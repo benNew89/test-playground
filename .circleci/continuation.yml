@@ -1,0 +1,46 @@
+version: 2.1
+
+orbs:
+  slack: circleci/slack@5.1.1
+  path-filtering: circleci/path-filtering@2.0.0
+
+setup: << pipeline.parameters.run-setup >>
+
+parameters:
+  run-setup:
+    type: boolean
+    default: true
+  build_hypgames:
+    type: boolean
+    default: false
+  # build_ultimatehunting:
+  #   type: boolean
+  #   default: true
+  RUN_S3_INSTALL:
+    type: boolean
+    default: false
+
+executors:
+  smallnode:
+    docker:
+      - image: cimg/node:14.21.3
+    resource_class: small
+
+jobs:
+  build_hypgames_dev:
+    executor: smallnode
+    steps:
+      - run: echo "build_hypgames_dev"
+
+
+  build_ultimatehunting:
+    executor: smallnode
+    steps:
+      - run: echo "build_ultimatehunting"
+
+workflows:
+  build:
+    when: << pipeline.parameters.build_hypgames >>
+    jobs:
+      - build_hypgames_dev:
+      - build_ultimatehunting:
