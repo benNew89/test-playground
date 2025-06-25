@@ -12,6 +12,7 @@ parameters:
     
 workflows:
   pre:
+    when: << pipeline.parameters.run-setup >>
     jobs:
       - path-filtering/filter:
           base-revision: << pipeline.git.base_revision >>
