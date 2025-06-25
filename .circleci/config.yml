@@ -12,10 +12,8 @@ parameters:
     
 workflows:
   pre:
-    when: << pipeline.parameters.run-setup >>
     jobs:
       - path-filtering/filter:
-          checkout: false
           config-path: .circleci/continuation.yml
           tag: '3.9.0'
           # 3-column space-separated table for mapping; `path-to-test parameter-to-set value-for-parameter` for each row
