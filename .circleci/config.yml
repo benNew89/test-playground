@@ -9,7 +9,28 @@ parameters:
   run-setup:
     type: boolean
     default: true
-    
+
+  build_hypgames:
+    type: boolean
+    default: false
+
+jobs:
+  # Precompile all the rust dependencies
+  compile:
+    executor: nix-executor
+    steps:
+      - run: echo "compile job in rust-rep 123"
+      
+  test:
+    executor: nix-executor
+    steps:
+      - run: echo "test job in rust-rep"
+
+  staging:
+    executor: nix-executor
+    steps:
+      - run: echo "staging job in rust-rep"
+
 workflows:
   pre:
     when: << pipeline.parameters.run-setup >>
@@ -18,10 +39,21 @@ workflows:
           base-revision: << pipeline.git.base_revision >>
           tag: '3.8.14'
           ## Config for continuation; herein we reuse this config itself
-          config-path: .circleci/continuation.yml
+          config-path: .circleci/config.yml
           # 3-column space-separated table for mapping; `path-to-test parameter-to-set value-for-parameter` for each row
           mapping: |
             .* run-setup false
             server/.* build_hypgames true
             mobile/client/Assets/PoolPrototype/BallPoolGame/Game/Scripts/Mechanics/.* build_hypgames true
             devdash/.* build_hypgames true
+
+  build:
+    when: << pipeline.parameters.build_hypgames >>
+    jobs:
+      - test
+      - compile
+      - staging:
+          requires:
+            - compile
+            - test
+  
