@@ -11,6 +11,9 @@ parameters:
   build-erp:
     type: boolean
     default: false
+  build-erp2:
+    type: boolean
+    default: false
 
 jobs:
   any-change:
