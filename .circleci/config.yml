@@ -9,7 +9,6 @@ jobs:
   test:
     description: 'Test prune'
     executor: default-executor
-    resource_class: 2xlarge
     steps:
       - checkout
       # try to restore the modules from the cache
