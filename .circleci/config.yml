@@ -9,15 +9,13 @@ jobs:
   test:
     description: 'Test prune'
     executor: default-executor
+      working_directory: ~/dev
     steps:
       - checkout
       # try to restore the modules from the cache
       - run:
           command: |
             df -h
-      - run:
-          command: |
-            cd /dev
       - run:
           command: |
             pwd
