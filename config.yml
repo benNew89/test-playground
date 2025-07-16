@@ -1,0 +1,24 @@
+---
+version: 2.1
+
+jobs:
+  hello-world:
+    docker:
+      - image: 'cimg/base:current'
+    steps:
+      - run: 'echo Hello World'
+
+workflows:
+  hello-world:
+    jobs:
+      - 'hello-world'
+      
+  scheduled:
+    jobs:
+      - 'hello-world'
+    triggers:
+      - schedule:
+          cron: '* * * * *'
+          filters:
+            branches:
+              only: master
