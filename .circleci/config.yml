@@ -14,7 +14,7 @@ jobs:
       # try to restore the modules from the cache
       - run:
           command: |
-            ls
+            df -h
 
 workflows:
   # to validate snyk, dependabot, and release PRs
