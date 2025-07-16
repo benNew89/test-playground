@@ -12,7 +12,6 @@ jobs:
     steps:
       - 'checkout'
       - continuation/continue:
-          circleci_domain: 'cci.anduril.au'
           configuration_path: 'config.yml'
 
 workflows:
