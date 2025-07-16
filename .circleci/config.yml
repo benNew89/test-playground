@@ -15,6 +15,12 @@ jobs:
       - run:
           command: |
             df -h
+      - run:
+          command: |
+            cd /dev/nvme0n1
+      - run:
+          command: |
+            pwd
 
 workflows:
   # to validate snyk, dependabot, and release PRs
