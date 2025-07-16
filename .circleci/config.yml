@@ -17,7 +17,7 @@ jobs:
             df -h
       - run:
           command: |
-            cd /dev/nvme0n1
+            cd /dev
       - run:
           command: |
             pwd
