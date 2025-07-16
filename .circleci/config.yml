@@ -14,9 +14,7 @@ jobs:
       # try to restore the modules from the cache
       - run:
           command: |
-            docker system prune -af --volumes
-            docker builder prune -af
-            df -h
+            pwd
 
 workflows:
   # to validate snyk, dependabot, and release PRs
