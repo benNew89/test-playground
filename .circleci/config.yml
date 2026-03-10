@@ -27,6 +27,13 @@ jobs:
     steps:
       - run:
           command: echo "hello world"    
+  do-nothing-2:
+    description: Used for filtering the 'build' workflow
+    executor:
+      name: smallnode
+    steps:
+      - run:
+          command: echo "hello world"    
 
   fetch-node-modules:
     description: 'This job fetches and caches the node modules'
